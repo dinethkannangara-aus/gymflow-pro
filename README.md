@@ -52,3 +52,15 @@ Build locally before deploying:
 ```bash
 npm run build
 ```
+
+## GitHub Actions deployment
+
+The included [`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml) workflow deploys the production site to Vercel whenever code is pushed to `main`. It can also be started manually from the GitHub Actions tab.
+
+Add these secrets in **GitHub repository settings > Secrets and variables > Actions**:
+
+- `VERCEL_TOKEN`: create this from your Vercel account settings.
+- `VERCEL_ORG_ID`: find this in the linked project's `.vercel/project.json` file after running `vercel link`.
+- `VERCEL_PROJECT_ID`: find this in the same `.vercel/project.json` file.
+
+Keep `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` configured in the Vercel project environment variables. The workflow retrieves them during `vercel pull`. Do not add a Supabase service role key.
